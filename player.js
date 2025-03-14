@@ -102,7 +102,7 @@ function initializePlayer(client) {
                 iconURL: musicIcons.playerIcon,
                 url: config.SupportServer
             })
-            .setFooter({ text: `Developed by Thalam Music`, iconURL: musicIcons.heartIcon })
+            .setFooter({ text: `Developed by Thaalam Music`, iconURL: musicIcons.heartIcon })
             .setTimestamp()
             .setDescription(  
                 `- **Title:** [${track.info.title}](${track.info.uri})\n` +
