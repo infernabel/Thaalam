@@ -24,7 +24,7 @@ module.exports = async (client) => {
         const totalMembers = client.guilds.cache.reduce((total, guild) => total + guild.memberCount, 0);
         client.user.setActivity({ 
             name: `${totalMembers} members`, 
-            type: ActivityType.Watching 
+            type: ActivityType.Streaming 
         });
     }, 10000);
 
