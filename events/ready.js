@@ -24,13 +24,13 @@ module.exports = async (client) => {
         const totalServers = client.guilds.cache.size;
         
         const statuses = [
-            { name: `${totalMembers} members`, type: ActivityType.Watching },
-            { name: `${totalServers} servers`, type: ActivityType.Watching }
+            { name: `${totalMembers} members`, type: ActivityType.Streaming },
+            { name: `${totalServers} servers`, type: ActivityType.Streaming }
         ];
 
         const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
         client.user.setActivity(randomStatus);
-    }, 10000);
+    }, 1000);
 
     client.errorLog = config.errorLog;
 };
