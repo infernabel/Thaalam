@@ -11,44 +11,22 @@ module.exports = async (client) => {
             await rest.put(Routes.applicationCommands(client.user.id), {
                 body: await client.commands,
             });
-            console.log("✅ Commands Loaded Successfully");
+            console.log('\x1b[36m%s\x1b[0m', '| 🚀 Commands Loaded successfully!');
         } catch (err) {
-            console.error("❌ Failed to load commands:", err.message);
+            console.log('\x1b[36m%s\x1b[0m', '| ❌ Commands Failed To Load!');
         }
     })();
 
-    const defaultActivity = {
-        name: config.activityName,
-        type: ActivityType[config.activityType.toUpperCase()]
-    };
+    console.log('\x1b[32m%s\x1b[0m', `| 🌼 Logged in as ${client.user.username}`);
 
-    async function updateStatus() {
- 
-        const activePlayers = Array.from(client.riffy.players.values()).filter(player => player.playing);
 
-        if (!activePlayers.length) {
-            //console.log("⏹️ No song is currently playing. Setting default status.");
-            client.user.setActivity(defaultActivity);
-            return;
-        }
-
-        const player = activePlayers[0];
-
-        if (!player.current || !player.current.info || !player.current.info.title) {
-            //console.log("⚠️ Current track info is missing. Keeping default status.");
-            return;
-        }
-
-        const trackName = player.current.info.title;
-        //console.log(`🎵 Now Playing: ${trackName}`);
-
-        client.user.setActivity({
-            name: `🎸 ${trackName}`,
-            type: ActivityType.Playing
+    setInterval(() => {
+        const totalMembers = client.guilds.cache.reduce((total, guild) => total + guild.memberCount, 0);
+        client.user.setActivity({ 
+            name: `${totalMembers} members`, 
+            type: ActivityType.Watching 
         });
-    }
-
-    setInterval(updateStatus, 5000);
+    }, 10000);
 
     client.errorLog = config.errorLog;
 };
