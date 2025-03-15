@@ -19,13 +19,17 @@ module.exports = async (client) => {
 
     console.log('\x1b[32m%s\x1b[0m', `| 🌼 Logged in as ${client.user.username}`);
 
-
     setInterval(() => {
         const totalMembers = client.guilds.cache.reduce((total, guild) => total + guild.memberCount, 0);
-        client.user.setActivity({ 
-            name: `${totalMembers} members`, 
-            type: ActivityType.Streaming 
-        });
+        const totalServers = client.guilds.cache.size;
+        
+        const statuses = [
+            { name: `${totalMembers} members`, type: ActivityType.Watching },
+            { name: `${totalServers} servers`, type: ActivityType.Watching }
+        ];
+
+        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+        client.user.setActivity(randomStatus);
     }, 10000);
 
     client.errorLog = config.errorLog;
