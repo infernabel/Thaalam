@@ -41,12 +41,12 @@ module.exports = async (client) => {
         const isLive = await checkStreamStatus();
 
         if (isLive) {
-            client.user.setActivity(`Streaming ${totalMembers} & ${totalServers}`, {
+            client.user.setActivity(` ${totalMembers} & ${totalServers}`, {
                 type: ActivityType.Streaming,
                 url: streamUrl
             });
         } else {
-            client.user.setActivity(`Playing with ${totalMembers} users in ${totalServers} servers`, {
+            client.user.setActivity(` with ${totalMembers} users in ${totalServers} servers`, {
                 type: ActivityType.Playing
             });
         }
